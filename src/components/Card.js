@@ -1,13 +1,17 @@
 import React from "react";
 
 export default function Card(props) {
+    function handleClick() {
+        props.onCardClick(props.card);
+    }
+    
     return (
         <li className="card">
             <img
             src={props.image}
             alt={props.title}
             className="card__image"
-            onClick = {() => props.onCardClick(props.card)}
+            onClick = {handleClick}
             />
             <div className="card__description">
                 <h2 className="card__name">{props.title}</h2>
