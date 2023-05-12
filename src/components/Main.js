@@ -31,7 +31,7 @@ function Main(props) {
   }, [])
 
   return (
-    <main>
+    <main className="content">
         <section className="profile">
             <div className="profile__info">
               <div className="profile__avatar-container">
