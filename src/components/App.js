@@ -20,30 +20,16 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
   
-
   React.useEffect(() => {
-    api.getUserData()
-      .then(res => setCurrentUser(res)
-      )
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then(result => {
-        setCards(result)
+    Promise.all([api.getUserData(), api.getInitialCards()])
+      .then(([userData, cards]) => {
+        setCurrentUser(userData);
+        setCards(cards);
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-
-  function handleCardClick(card) {
-    setIsImageOpen(true)
-    setSelectedCard(card)
-  }
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
@@ -114,6 +100,11 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
+  }
+  
+  function handleCardClick(card) {
+    setIsImageOpen(true)
+    setSelectedCard(card)
   }
 
   return (

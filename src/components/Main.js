@@ -3,18 +3,7 @@ import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  //const [cards, setCards] = React.useState([])
   const currentUser = React.useContext(CurrentUserContext)
-
-  // React.useEffect(() => {
-  //   api.getInitialCards()
-  //     .then(result => {
-  //       setCards(result)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }, [])
 
   return (
     <main className="content">
