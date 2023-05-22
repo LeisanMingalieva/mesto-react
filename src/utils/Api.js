@@ -81,6 +81,11 @@ class Api {
   _request(urlEndpoint, options) {
     return fetch(`${this.url}${urlEndpoint}`, options).then(this._checkResponse)
   }
+
+  changeLikeCardStatus(obj, variable) {
+    this._status = variable ? this.likeCard(obj) : this.dislikeCard(obj);
+    return this._status;
+  }
 }
 
 export const api = new Api({

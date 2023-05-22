@@ -1,21 +1,20 @@
 import React from 'react';
-import {api} from '../utils/Api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [cards, setCards] = React.useState([])
+  //const [cards, setCards] = React.useState([])
   const currentUser = React.useContext(CurrentUserContext)
-  
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then(result => {
-        setCards(result)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+
+  // React.useEffect(() => {
+  //   api.getInitialCards()
+  //     .then(result => {
+  //       setCards(result)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }, [])
 
   return (
     <main className="content">
@@ -37,7 +36,7 @@ function Main(props) {
         <section aria-label="Фото" className="elements">
             <ul className="cards">
               {
-                cards.map((card) => (
+                props.cards.map((card) => (
                   <Card
                     key = {card._id}
                     card = {card}
@@ -45,6 +44,8 @@ function Main(props) {
                     likeCount = {card.likes.length}
                     image = {card.link}
                     onCardClick = {props.onCardClick}
+                    onCardLike = {props.onCardLike}
+                    onCardDelete = {props.onCardDelete}
                   />
                 ))
               }
