@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -8,7 +8,7 @@ function EditAvatarPopup({onUpdateAvatar, onClose, isOpen}) {
 
   React.useEffect(() => {
     avatarRef.current.value = ''
-  }, [currentUser])
+  }, [currentUser, isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
