@@ -2,23 +2,24 @@ import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import PopupWithForm from './PopupWithForm';
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import {api} from '../utils/Api';
+import { func } from 'prop-types';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
-  const [isImageOpen, setIsImageOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState({})
-  const [currentUser, setCurrentUser] = React.useState({})
-  const [cards, setCards] = React.useState([])
+  const [isImageOpen, setIsImageOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
   
   React.useEffect(() => {
     Promise.all([api.getUserData(), api.getInitialCards()])
@@ -48,7 +49,7 @@ function App() {
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
-  }  
+  }
 
   function handleUpdateUser(data) {
     api.setUserData(data)
@@ -117,7 +118,7 @@ function App() {
         onEditAvatar = {handleEditAvatarClick}
         onCardClick = {handleCardClick}
         onCardLike= {handleCardLike}
-        onCardDelete = {handleCardDelete}
+        onCardDelete={handleCardDelete}
         cards = {cards}
       />         
       <Footer />
@@ -137,10 +138,9 @@ function App() {
         card={selectedCard}
       />
       <PopupWithForm
-        name={'confirmForm'}
-        title = {'Вы уверены?'}
-        isOpen={false}
-        onClose={closeAllPopups}
+      name={'confirmForm'}
+      title = {'Вы уверены?'}
+      buttonText={'Да'}
       />
       <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
